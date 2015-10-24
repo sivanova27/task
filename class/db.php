@@ -25,4 +25,5 @@ class DB{
 		return pg_fetch_all($result);
 	}
 	
+	
 }

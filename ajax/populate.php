@@ -7,8 +7,10 @@ if(is_array($allXmlFiles)){
 	foreach($allXmlFiles as $xmlFile){
 		$books =simplexml_load_file($xmlFile);
 		foreach($books as $book){
-			$insert = "INSERT INTO books (author, name, time_added) SELECT '".$book->author."','".$book->name."', NOW()";
-			$upsert = "UPDATE books SET time_added=NOW() WHERE author='".$book->author."' AND name='".$book->name."'";
+			$escaped_author  = pg_escape_string($book->author);
+			$escaped_name = pg_escape_string($book->name);
+			$insert = "INSERT INTO books (author, name, time_added) SELECT '".$escaped_author."','".$escaped_name."', NOW()";
+			$upsert = "UPDATE books SET time_added=NOW() WHERE author='".$escaped_author."' AND name='".$escaped_name."'";
 			$db->query("WITH upsert AS ($upsert RETURNING *) $insert WHERE NOT EXISTS (SELECT * FROM upsert)");
 		}
 	}

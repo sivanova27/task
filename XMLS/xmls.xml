@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <books>
 	<book>
-	    <author>Petar Petrov</author>
-	    <name>Spirit</name>
+	    <author>Petar's name</author>
+	    <name>Spirits test2</name>
 	</book>
 	<book>
 	    <author>Ivan Ivanov</author>
-	    <name>End</name>
+	    <name>End of God's angry</name>
 	</book>
 </books>

@@ -1,12 +1,13 @@
 <?php
 require "../config.php";
 
-$author = pg_escape_string($_POST['author']);
+$author = $_POST['author'];
 if(trim($author)==''){
 	 echo json_encode(array('error'=>1, 'message'=>'Search author name is empty.'));
 }
 else{
-	$res = $db->query("SELECT * FROM books WHERE author ILIKE '%".$author."%'");
+	$query = 'SELECT * FROM books WHERE author ILIKE $1';
+	$res = $db->prepare($query, array("%$author%"));
 	$allBooks = $db->fetchAll($res);
 	if($allBooks){
 		echo json_encode($allBooks);

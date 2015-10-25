@@ -25,5 +25,11 @@ class DB{
 		return pg_fetch_all($result);
 	}
 	
+	public function prepare($query, $params){
+		return pg_query_params($this->dbh, $query, $params);
+	}
 	
+	public function escape_string($str){
+		return pg_escape_string($str);
+	}
 }
